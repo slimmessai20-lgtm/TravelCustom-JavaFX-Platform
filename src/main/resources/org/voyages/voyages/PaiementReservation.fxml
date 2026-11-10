@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.PaiementReservation"
+      spacing="12" style="-fx-padding: 20;">
+
+    <Label text="Paiement de réservation" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <Label fx:id="lblReservation" text="Réservation"/>
+    <Label fx:id="lblMontant" text="Montant"/>
+
+    <Separator />
+
+    <HBox spacing="10">
+        <Button text="Payer avec Stripe (Checkout)" onAction="#handleCreerPaiement" />
+        <Button text="Ouvrir paiements (test)" onAction="#handleOuvrirPaiementsTest" />
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Checkout Session ID:" />
+        <TextField fx:id="txtPaymentIntentId" prefWidth="320" />
+    </HBox>
+
+    <Button text="Vérifier paiement &amp; envoyer reçu PDF" onAction="#handleVerifierEtEnvoyerRecu" />
+
+    <Label fx:id="lblMessage" style="-fx-text-fill: #d32f2f;" wrapText="true" />
+
+</VBox>

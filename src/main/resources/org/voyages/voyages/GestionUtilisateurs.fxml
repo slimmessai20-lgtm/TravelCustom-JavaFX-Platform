@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.GestionUtilisateurs"
+            prefHeight="600.0" prefWidth="900.0"
+            style="-fx-background-color: #f5f5f5;">
+
+    <top>
+        <VBox style="-fx-background-color: #FF5722; -fx-padding: 20;">
+            <Label text="Gestion des Utilisateurs" textFill="WHITE">
+                <font><Font name="System Bold" size="20"/></font>
+            </Label>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="15" style="-fx-padding: 20;">
+
+            <HBox spacing="10">
+                <Button text="+ Nouvel Utilisateur" onAction="#handleNouvelUtilisateur"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand;"/>
+                <Button text="✏ Modifier" onAction="#handleModifier"
+                        style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-cursor: hand;"/>
+                <Button text="🗑 Supprimer" onAction="#handleSupprimer"
+                        style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-cursor: hand;"/>
+                <Button text="🔄 Actualiser" onAction="#handleActualiser"
+                        style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-cursor: hand;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="txtRecherche" promptText="Rechercher par nom ou email..."
+                           prefWidth="250" onKeyReleased="#handleRecherche"/>
+            </HBox>
+
+            <TabPane VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+
+                <Tab text="Tous les Utilisateurs">
+                    <TableView fx:id="tableViewTous" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colTousId" text="ID" prefWidth="50"/>
+                            <TableColumn fx:id="colTousNom" text="Nom" prefWidth="200"/>
+                            <TableColumn fx:id="colTousEmail" text="Email" prefWidth="250"/>
+                            <TableColumn fx:id="colTousRole" text="Rôle" prefWidth="150"/>
+                        </columns>
+                    </TableView>
+                </Tab>
+
+                <Tab text="Clients">
+                    <TableView fx:id="tableViewClients" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colClientId" text="ID" prefWidth="50"/>
+                            <TableColumn fx:id="colClientNom" text="Nom" prefWidth="250"/>
+                            <TableColumn fx:id="colClientEmail" text="Email" prefWidth="300"/>
+                        </columns>
+                    </TableView>
+                </Tab>
+
+                <Tab text="Agents">
+                    <TableView fx:id="tableViewAgents" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colAgentId" text="ID" prefWidth="50"/>
+                            <TableColumn fx:id="colAgentNom" text="Nom" prefWidth="250"/>
+                            <TableColumn fx:id="colAgentEmail" text="Email" prefWidth="300"/>
+                        </columns>
+                    </TableView>
+                </Tab>
+
+                <Tab text="Administrateurs">
+                    <TableView fx:id="tableViewAdmins" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colAdminId" text="ID" prefWidth="50"/>
+                            <TableColumn fx:id="colAdminNom" text="Nom" prefWidth="250"/>
+                            <TableColumn fx:id="colAdminEmail" text="Email" prefWidth="300"/>
+                        </columns>
+                    </TableView>
+                </Tab>
+
+            </TabPane>
+
+        </VBox>
+    </center>
+
+</BorderPane>
+

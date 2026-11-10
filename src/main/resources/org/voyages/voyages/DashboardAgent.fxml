@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.DashboardAgent"
+            prefHeight="700.0" prefWidth="1200.0"
+            style="-fx-background-color: #f5f5f5;">
+
+    <!-- Header -->
+    <top>
+        <VBox style="-fx-background-color: #673AB7; -fx-padding: 20;">
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Label text="Espace Agent - Gestion des Voyages" textFill="WHITE">
+                    <font><Font name="System Bold" size="24"/></font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="lblNomAgent" text="Agent" textFill="WHITE">
+                    <font><Font size="14"/></font>
+                </Label>
+                <Button text="Déconnexion" onAction="#handleLogout"
+                        style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- Center Content -->
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+
+            <!-- Statistiques -->
+            <HBox spacing="20" alignment="CENTER">
+                <VBox alignment="CENTER" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                    <Label fx:id="lblTotalDemandes" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #673AB7;"/>
+                    <Label text="Demandes assignées" style="-fx-font-size: 14px; -fx-text-fill: #757575;"/>
+                </VBox>
+                <VBox alignment="CENTER" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                    <Label fx:id="lblDemandesEnCours" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+                    <Label text="En cours" style="-fx-font-size: 14px; -fx-text-fill: #757575;"/>
+                </VBox>
+                <VBox alignment="CENTER" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                    <Label fx:id="lblReservations" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;"/>
+                    <Label text="Réservations" style="-fx-font-size: 14px; -fx-text-fill: #757575;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Tabs -->
+            <TabPane VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+
+                <!-- Tab Demandes en attente -->
+                <Tab text="Demandes en Attente">
+                    <VBox spacing="15" style="-fx-padding: 15;">
+                        <HBox spacing="10">
+                            <Button text="🔄 Actualiser" onAction="#handleActualiserAttente"
+                                    style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-cursor: hand;"/>
+                            <Button text="Prendre en charge" onAction="#handlePrendreEnCharge"
+                                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand;"/>
+                        </HBox>
+
+                        <TableView fx:id="tableViewAttente" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="colAttenteId" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="colAttenteDestination" text="Destination" prefWidth="150"/>
+                                <TableColumn fx:id="colAttenteClient" text="Client" prefWidth="120"/>
+                                <TableColumn fx:id="colAttenteDateDebut" text="Date Début" prefWidth="100"/>
+                                <TableColumn fx:id="colAttenteDateFin" text="Date Fin" prefWidth="100"/>
+                                <TableColumn fx:id="colAttentePreferences" text="Préférences" prefWidth="250"/>
+                                <TableColumn fx:id="colAttenteDateCreation" text="Date Création" prefWidth="150"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+
+                <!-- Tab Mes Demandes -->
+                <Tab text="Mes Demandes">
+                    <VBox spacing="15" style="-fx-padding: 15;">
+                        <HBox spacing="10">
+                            <Button text="🔄 Actualiser" onAction="#handleActualiserMesDemandes"
+                                    style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-cursor: hand;"/>
+                            <Button text="Modifier Statut" onAction="#handleModifierStatut"
+                                    style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-cursor: hand;"/>
+                            <Button text="Créer Réservation" onAction="#handleCreerReservation"
+                                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand;"/>
+                        </HBox>
+
+                        <TableView fx:id="tableViewMesDemandes" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="colMesId" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="colMesDestination" text="Destination" prefWidth="150"/>
+                                <TableColumn fx:id="colMesClient" text="Client" prefWidth="120"/>
+                                <TableColumn fx:id="colMesDateDebut" text="Date Début" prefWidth="100"/>
+                                <TableColumn fx:id="colMesDateFin" text="Date Fin" prefWidth="100"/>
+                                <TableColumn fx:id="colMesStatut" text="Statut" prefWidth="120"/>
+                                <TableColumn fx:id="colMesReservation" text="Réservation" prefWidth="100"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+
+                <!-- Tab Mes Réservations -->
+                <Tab text="Mes Réservations">
+                    <VBox spacing="15" style="-fx-padding: 15;">
+                        <HBox spacing="10">
+                            <Button text="🔄 Actualiser" onAction="#handleActualiserReservations"
+                                    style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-cursor: hand;"/>
+                            <Button text="Modifier Statut" onAction="#handleModifierStatutReservation"
+                                    style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-cursor: hand;"/>
+                        </HBox>
+
+                        <TableView fx:id="tableViewReservations" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="colResId" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="colResClient" text="Client" prefWidth="120"/>
+                                <TableColumn fx:id="colResDestination" text="Destination" prefWidth="150"/>
+                                <TableColumn fx:id="colResPrix" text="Prix Total" prefWidth="100"/>
+                                <TableColumn fx:id="colResStatut" text="Statut" prefWidth="100"/>
+                                <TableColumn fx:id="colResDateRes" text="Date Réservation" prefWidth="150"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+
+            </TabPane>
+
+        </VBox>
+    </center>
+
+</BorderPane>
+
